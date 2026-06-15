@@ -2,6 +2,7 @@
 
 A clean, modern weather app built with vanilla HTML, CSS, and JavaScript. Features a premium glassmorphism UI with live weather data powered by the OpenWeatherMap API.
 
+Live link - https://Tanishk1906.github.io/Weather-App/
 
 ✨ Features
 
