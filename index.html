@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skye — Weather App</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css"/>
+</head>
+<body>
+
+  <!-- Animated background blobs -->
+  <div class="bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="app-shell">
+
+    <!-- Header -->
+    <header class="header">
+      <span class="logo">☁ Skye</span>
+      <span class="tagline">Your personal weather companion</span>
+    </header>
+
+    <!-- Search -->
+    <div class="search-wrapper">
+      <div class="search-box">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" id="cityInput" placeholder="Search for a city..." autocomplete="off" />
+        <button id="searchBtn">Search</button>
+      </div>
+      <p class="error-msg" id="errorMsg"></p>
+    </div>
+
+    <!-- Loading spinner -->
+    <div class="loader" id="loader">
+      <div class="spinner"></div>
+      <p>Fetching weather...</p>
+    </div>
+
+    <!-- Weather Card -->
+    <div class="weather-card" id="weatherCard">
+
+      <!-- Top Section -->
+      <div class="card-top">
+        <div class="location-info">
+          <h1 class="city-name" id="cityName">—</h1>
+          <p class="country-date" id="countryDate">—</p>
+        </div>
+        <div class="temp-block">
+          <img id="weatherIcon" src="" alt="weather icon" class="weather-icon-img"/>
+          <span class="temp" id="temperature">—</span>
+          <span class="unit">°C</span>
+        </div>
+        <p class="condition" id="condition">—</p>
+        <p class="feels-like" id="feelsLike">Feels like —</p>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider"></div>
+
+      <!-- Stats Row -->
+      <div class="stats-row">
+        <div class="stat">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg>
+          <span class="stat-value" id="humidity">—</span>
+          <span class="stat-label">Humidity</span>
+        </div>
+        <div class="stat">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+          <span class="stat-value" id="windSpeed">—</span>
+          <span class="stat-label">Wind</span>
+        </div>
+        <div class="stat">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span class="stat-value" id="visibility">—</span>
+          <span class="stat-label">Visibility</span>
+        </div>
+        <div class="stat">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M12 12C12 12 7 9 7 5a5 5 0 0 1 10 0c0 4-5 7-5 7z"/></svg>
+          <span class="stat-value" id="pressure">—</span>
+          <span class="stat-label">Pressure</span>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider"></div>
+
+      <!-- Sun times -->
+      <div class="sun-row">
+        <div class="sun-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <div>
+            <p class="sun-label">Sunrise</p>
+            <p class="sun-time" id="sunrise">—</p>
+          </div>
+        </div>
+        <div class="sun-divider"></div>
+        <div class="sun-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/></svg>
+          <div>
+            <p class="sun-label">Sunset</p>
+            <p class="sun-time" id="sunset">—</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 5-Day Forecast -->
+    <div class="forecast-section" id="forecastSection">
+      <h2 class="section-title">5-Day Forecast</h2>
+      <div class="forecast-row" id="forecastRow"></div>
+    </div>
+
+    <footer class="footer">Powered by OpenWeatherMap &nbsp;·&nbsp; Built with ❤️</footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
